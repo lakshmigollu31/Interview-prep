@@ -38,3 +38,84 @@ print(next(it))
 HERE if we still add one more next statement itw ill give you stopiteration errror
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 GENERATORS
+
+Generators in Python are a powerful feature for creating iterators in a simpler and more concise way. They allow you to iterate over sequences of values without needing to store the entire sequence in memory,
+Generators are a type of iterable, like lists or tuples, but they generate items one at a time and only as needed
+
+Sfter return, code is  inreacheable, but for yield its not like that, even after yield you can still do another yild.
+
+ITERATOR IS A CLASS, GENEARTOR IS FUNCTIOn
+
+def simple_generator():
+    yield 1
+    yield 2
+    yield 3
+
+gen = simple_generator()
+print(next(gen))  # Outputs: 1
+print(next(gen))  # Outputs: 2
+print(next(gen))  # Outputs: 3
+
+How Generators Work
+State Preservation: Generators maintain their state between yield calls. This means they remember where they left off.Lazy Evaluation: Generators evaluate values only when needed.
+
+def gen(start,end):
+    while start<=end:
+        yield start
+        start+=1
+
+for i in gen(4,8):
+    print(i)
+or
+
+def gen(start,end):
+    while start<=end:
+        yield start
+        start+=1
+
+out=gen(4,8)
+print(next(out))
+print(next(out))
+print(next(out))
+
+
+
+3. Can you give an example where using an iterator is preferable to using a list?
+Example: Reading Large Files
+
+When dealing with large files, loading the entire file into memory might be impractical due to memory constraints. Using an iterator allows you to process the file line by line without loading the entire file into memory.
+
+4. What happens if you use yield inside a function without __iter__() and __next__() methods?
+Example: Using yield in a Generator Function
+
+python
+Copy code
+def simple_gen():
+    yield 1
+    yield 2
+    yield 3
+
+# Usage
+gen = simple_gen()
+for value in gen:
+    print(value)
+
+Example 3: Using send() to Control Generator Execution
+This example shows how to use send() to control the flow of execution in a generator.
+
+python
+Copy code
+def controlled_counter():
+    count = 0
+    while True:
+        count = yield count
+        if count is None:
+            count = 0
+        print(f"Count is now: {count}")
+
+# Usage
+gen = controlled_counter()
+next(gen)  # Prime the generator
+print(gen.send(5))  # Outputs: Count is now: 5
+print(gen.send(10))  # Outputs: Count is now: 10
+print(gen.send(None))  # Outputs: Count is now: 0
