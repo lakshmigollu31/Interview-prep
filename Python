@@ -210,3 +210,62 @@ obj = Fibo()
 for i in obj:
     print(i)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. What is a Decorator?
+A decorator is a function that takes another function (or method) as an argument and returns a new function that typically extends or alters the behavior of the original function. Decorators are commonly used for logging, access control, memoization, and more.
+
+def to_uppercase_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+
+    return wrapper
+
+@to_uppercase_decorator
+def get_result():
+    return "hello world"
+
+print(get_result())  # Outputs: HELLO WORLD
+--------------------------------------------------------------------------
+applying 2 decoratoes on single func, here inner mostw ill be considered first which converts to upper then spliwords is considered.
+
+def to_uppercase_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+    return wrapper
+
+def split_words_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.split()
+
+    return wrapper
+
+
+@split_words_decorator
+@to_uppercase_decorator
+def get_result():
+    return "hello world python decorators"
+
+print(get_result())  # Outputs: ['HELLO', 'WORLD', 'PYTHON', 'DECORATORS']
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+o pass parameters to a decorator function, you need to create a decorator factory. A decorator factory is a function that returns a decorator
+
+def to_case_decorator(name):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return result.upper() +name
+        return wrapper
+    return decorator
+
+
+
+@to_case_decorator(" LAKSHMI")
+def get_result():
+    return "hello world python decorators"
+
+print(get_result())  # Outputs: ['HELLO', 'WORLD', 'PYTHON', 'DECORATORS']
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
