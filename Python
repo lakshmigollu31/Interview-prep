@@ -30,4 +30,11 @@ for num in it:
     print(num)  # Outputs: 1, 2, 3
 Iterable Objects: An object is considered iterable if it implements the __iter__() method, which should return an iterator. 
 Iterable objects include lists, tuples, strings, and dictionaries. These objects can be used directly in a for loop or with functions like map(), filter(), and zip().
+my_list = [1, 2, 3]
+it = iter(my_list)  # Convert list to an iterator
+print(next(it))  # Outputs: 1
+print(next(it))
+print(next(it))
+HERE if we still add one more next statement itw ill give you stopiteration errror
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+GENERATORS
