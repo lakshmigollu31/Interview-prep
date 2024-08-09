@@ -1,0 +1,33 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ITERATOR
+
+Iterators in Python are objects that allow you to traverse through a sequence of elements one at a time, without needing to know the underlying structure of the sequence.
+They are used to iterate over collections like lists, tuples, dictionaries, and sets. Here’s a breakdown of how they work:
+
+Iterator Protocol: An object is considered an iterator if it implements two methods:
+
+__iter__(): Returns the iterator object itself. This method is required for the object to be used in a for loop or other iteration contexts.
+__next__(): Returns the next item in the sequence. When there are no more items to return, it raises the StopIteration exception to signal the end of the iteration.
+python
+Copy code
+class MyIterator:
+    def __init__(self, start, end):
+        self.current = start
+        self.end = end
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current >= self.end:
+            raise StopIteration
+        else:
+            self.current += 1
+            return self.current - 1
+
+it = MyIterator(1, 4)
+for num in it:
+    print(num)  # Outputs: 1, 2, 3
+Iterable Objects: An object is considered iterable if it implements the __iter__() method, which should return an iterator. 
+Iterable objects include lists, tuples, strings, and dictionaries. These objects can be used directly in a for loop or with functions like map(), filter(), and zip().
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
