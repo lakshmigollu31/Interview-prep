@@ -355,3 +355,90 @@ def greet():
 
 print(greet(3))
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+below is class based decorator
+call is special method for printigd ata in it
+
+
+class Mydecorator:
+    def __init__(self):
+        pass
+    def __call__(self,func):
+        def wrapper(*args, **kwargs):
+            result=func(*args, **kwargs)
+            return result.upper()
+        return wrapper
+
+
+class Myclass:
+    def __init__(self):
+        pass
+    @Mydecorator()
+    def main(self):
+        return "Hello, Welcome!!!"
+    
+out=Myclass()
+print(out.main())
+------------------------------------------------------------------------------
+
+
+If you dont wnat to use call method in decorator clases, calling should be different like below
+
+class Mydecorator:
+    def __init__(self):
+        pass
+    def decorator(self,func):
+        def wrapper(*args, **kwargs):
+            result=func(*args, **kwargs)
+            return result.upper()
+        return wrapper
+
+
+class Myclass:
+    def __init__(self):
+        pass
+    @Mydecorator().decorator
+    def main(self):
+        return "Hello, Welcome!!!"
+    
+out=Myclass()
+print(out.main())
+
+ @Mydecorator().decorator is change we saw above
+
+-----------------------------------------------------------------------------------------------
+decorators for methods
+
+def mydecorator(method):
+    def wrapper(self,*args,**kwargs):
+        if self.name=="Lucky":
+            print ("Yess, correct")
+        else:
+            return method(self,*args,**kwargs)  
+    return wrapper
+
+
+
+class Myclass:
+    def __init__(self,name):
+        self.name=name
+    @mydecorator
+    def main(self):
+        return f"Hey {self.name}"
+    
+obk1=Myclass("Ammu")
+print(obk1.main())
+
+-----------------------------------------------------------------------------------------------
+typles of namespaces
+global,local,builtin
+global when we do imports, local for function and classes , builtin when you write python code
+
+variable: part of program where variable is accessible called a svariable scope
+
+local scope: names inside function
+global scope:names at top of scipt, available throught program
+enclosed scope: names in enclosed function, eg: nested functions
+builtin scope: names builtin to python ..eg: print, any, all,zip,enumerate
+LEGB rule
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
