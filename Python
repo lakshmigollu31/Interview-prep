@@ -341,5 +341,17 @@ def greet():
 
 print(greet())
 
+or withput init below
+class RepeatDecorator:
+    def __call__(self, func):
+        def wrapper(times,*args, **kwargs):
+            result = func(*args, **kwargs)
+            return result * times
+        return wrapper
 
+@RepeatDecorator()
+def greet():
+    return "Hello! "
+
+print(greet(3))
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
