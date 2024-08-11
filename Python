@@ -442,3 +442,123 @@ enclosed scope: names in enclosed function, eg: nested functions
 builtin scope: names builtin to python ..eg: print, any, all,zip,enumerate
 LEGB rule
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# builtin decorators
+refer to notebook for clear explanatations....
+@property
+
+for all methods refer notes below example
+
+import re
+
+class User:
+    users = {}  # Class-level dictionary to store users
+
+    def __init__(self, user_id, name, email):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        User.users[user_id] = self  # Add user to the class-level dictionary
+
+    @staticmethod
+    def validate_email(email):
+        """Static method to validate email format."""
+        pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        return re.match(pattern, email) is not None
+
+    def update_email(self, new_email):
+        """Instance method to update the user's email."""
+        if User.validate_email(new_email):
+            self.email = new_email
+        else:
+            raise ValueError("Invalid email format")
+
+    @classmethod
+    def get_user_by_id(cls, user_id):
+        """Class method to retrieve a user by their ID."""
+        return cls.users.get(user_id, "User not found")
+
+# Example usage
+user1 = User(1, "Alice", "alice@example.com")
+user2 = User(2, "Bob", "bob@example.com")
+
+# Validate emails
+print(User.validate_email("valid.email@example.com"))  # True
+print(User.validate_email("invalid-email"))  # False
+
+# Update email
+try:
+    user1.update_email("newalice@example.com")
+    print(user1.email)  # Should print "newalice@example.com"
+except ValueError as e:
+    print(e)
+
+# Retrieve users
+print(User.get_user_by_id(1))  # Should print user1 details
+print(User.get_user_by_id(3))  # Should print "User not found"
+---------------------------------------------------------------------------------------------
+# Class based decorators, builtin decorators, decorartors for methods, functools
+class System:
+    products=dict()
+    discountprice=500
+    def __init__(self,productid,name,price):
+        self.productid=productid
+        self.name=name
+        self.price=price
+        System.products[productid]=self
+
+    def __str__(self):
+        return f"Product ID: {self.productid}, Name: {self.name}, Price: {self.price}"
+
+    @staticmethod
+    def calculate_discount(price, discount_percentage):
+        return price * (1 - discount_percentage / 100)
+
+    @classmethod
+    def getproducts(cls,id):
+        return cls.products.get(id)
+    
+    def editprice(self,value):
+        self.price=value
+        return self.price
+
+product1 = System(1, "Laptop", 10000)
+product2 = System(2, "Smartphone", 500)
+print(product1.editprice(70000))
+print(product1)
+print(product2)
+
+Here __sts__ method used to display all inof used, you can use normal methosd also, but if you use it, you hav eto print evry object to see individual dat, here using__str__ it will give all objects data
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Instance methods are the most common type of methods in a class. They operate on an instance of the class (i.e., an object) and can access and modify the instance's attributes. They take self as their first parameter, which refers to the instance on which the method is called.
+
+Static Methods
+Definition: Static methods are methods that do not operate on an instance of the class or the class itself. They do not take self or cls as the first parameter. Static methods are used for utility functions that perform a task in isolation and do not need access to instance or class-specific data.
+
+Class Methods
+Definition: Class methods are methods that operate on the class itself, rather than on instances of the class. They take cls as their first parameter, which refers to the class itself. Class methods can access and modify class-level attributes.
+
+PROPERTY
+ Property methods provide a way to define methods in a class that can be accessed like attributes. They are used to get, set, or delete values of private attributes indirectly. You use the @property decorator to define a getter method, and @<property_name>.setter to define a setter method.
+
+
+class Example:
+    def __init__(self, value):
+        self._value = value
+    
+    @property
+    def value(self):
+        return self._value
+    
+    @value.setter
+    def value(self, new_value):
+        self._value = new_value
+    
+    @value.deleter
+    def value(self):
+        del self._value
+Summary
+Instance Method: Operates on an instance of the class (self), can access and modify instance attributes.
+Static Method: Does not operate on an instance or class (self or cls), used for utility functions.
+Class Method: Operates on the class itself (cls), can access and modify class attributes, often used for factory methods.
+Property Method: Allows methods to be accessed like attributes, provides a way to manage private attributes with getter, setter, and deleter methods.
