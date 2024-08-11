@@ -288,7 +288,21 @@ def message():
 
 print(message())
 
+or below
+def repeat():
+    def decorator(func):
+        def wrapper(times):
+            result=func()
+            for i in range(times):
+                return result*times
+        return wrapper
+    return decorator
 
+@repeat()
+def message():
+    return "hello, Welcome!!!"
+
+print(message(5))
 ---------------------------------------------------------------------------------------
 Example: Authorization Check
 
