@@ -379,6 +379,8 @@ class Myclass:
     
 out=Myclass()
 print(out.main())
+
+Note:__call__ method: This is a special method that allows an object of a class to be called as a function. By using __call__, the decorator works correctly.
 ------------------------------------------------------------------------------
 
 
