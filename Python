@@ -603,3 +603,95 @@ print("Circle's Area:", circle.area())           # Outputs the area of the circl
 
 rectangle = Rectangle(4, 6)
 print("Rectangle's Area:", rectangle.area())           # Outputs the area of the rectangle
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+POLYMORPHISM
+
+Theory of Polymorphism
+Polymorphism is a fundamental concept in object-oriented programming (OOP) that means "many forms." It allows objects of different classes to be treated as objects of a common superclass. The primary advantage of polymorphism is that it enables the same function or method to behave differently based on the object that it is acting upon, leading to more flexible and reusable code.
+
+Types of Polymorphism
+Compile-time Polymorphism (Static Polymorphism)
+
+Achieved through method overloading.
+The function to be executed is determined at compile time based on the number or type of parameters.
+Example: Two functions with the same name but different signatures (different number or types of arguments).
+Runtime Polymorphism (Dynamic Polymorphism)
+
+Achieved through method overriding.
+The method to be executed is determined at runtime, depending on the type of the object.
+Example: A subclass provides a specific implementation of a method that is already defined in its parent class.
+1. Compile-time Polymorphism (Method Overloading)
+class Calculator:
+    def add(self, a, b, c=0):
+        return a + b + c
+
+calc = Calculator()
+print(calc.add(2, 3))      # Output: 5
+print(calc.add(2, 3, 4))   # Output: 9
+COMPLIKE TIM EPOLYMORPHISM IN CLASSED AN DOBJECTS
+class Animal:
+    def __init__(self):
+        pass
+    def fly(self):
+        return "animal cant fly"
+
+class Bird:
+    def __init__(self):
+        pass
+    def fly(self):
+        return "bird can fly"
+
+def main(flying):
+    return flying.fly()
+
+animal1=Animal()
+bird1=Bird()
+
+print(main(animal1))
+main(bird1)
+Types of Polymorphism
+Compile-time Polymorphism (Static Polymorphism)
+
+Achieved through method overloading.
+The function to be executed is determined at compile time based on the number or type of parameters.
+
+
+Example:
+python
+Copy code
+class Calculator:
+    def add(self, a, b, c=0):
+        return a + b + c
+
+calc = Calculator()
+print(calc.add(2, 3))      # Output: 5
+print(calc.add(2, 3, 4))   # Output: 9
+Explanation: The add() method takes either two or three arguments. If a third argument isn't provided, it defaults to 0. Here, the method behaves differently based on the number of arguments passed.
+
+This is compile-time polymorphism because the behavior of the add() method is determined at compile time (based on how many arguments are passed to it).
+
+2. Runtime Polymorphism (Method Overriding)
+
+class Animal:
+    def sound(self):
+        return "Some generic sound"
+
+class Dog(Animal):
+    def sound(self):
+        return "Bark"
+
+class Cat(Animal):
+    def sound(self):
+        return "Meow"
+
+def make_sound(animal):
+    print(animal.sound())
+
+dog = Dog()
+cat = Cat()
+
+make_sound(dog)  # Output: Bark
+make_sound(cat)  # Output: Meow
+
+
