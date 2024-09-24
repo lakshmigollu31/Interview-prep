@@ -564,3 +564,42 @@ Instance Method: Operates on an instance of the class (self), can access and mod
 Static Method: Does not operate on an instance or class (self or cls), used for utility functions.
 Class Method: Operates on the class itself (cls), can access and modify class attributes, often used for factory methods.
 Property Method: Allows methods to be accessed like attributes, provides a way to manage private attributes with getter, setter, and deleter methods.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ooopssssssssssssssssssssssss
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Abstarcation
+
+from abc import ABC, abstractmethod
+
+# Abstract base class
+class CShape(ABC):
+    @abstractmethod
+    def area(self):
+        """Method to calculate the area of the shape"""
+        pass
+
+# Concrete class for Circle
+class Circle(CShape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        """Calculates the area of the circle"""
+        return 3.1415 * self.radius * self.radius
+
+# Concrete class for Rectangle
+class Rectangle(CShape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        """Calculates the area of the rectangle"""
+        return self.length * self.width
+
+# Example usage
+circle = Circle(5)
+print("Circle's Area:", circle.area())           # Outputs the area of the circle
+
+rectangle = Rectangle(4, 6)
+print("Rectangle's Area:", rectangle.area())           # Outputs the area of the rectangle
