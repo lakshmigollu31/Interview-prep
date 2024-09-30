@@ -1,3 +1,187 @@
+***************What is Walrus Operator? [version 3.8 upward]
+This can be useful when you need to use a value multiple times in a loop, but don’t want to repeat the calculation.
+The Walrus Operator is represented by the `:=` 
+
+Example without the Walrus Operator
+value = some_expensive_computation()
+if value is not None:
+    print(value)
+
+Example with the Walrus Operator
+if (value := some_expensive_computation()) is not None:
+    print(value)
+----------------------------------------------------------------------------------------------------------------------------------
+*********What is Python Switch Statement [version 3.10 upward,]
+we are using this imstead of if elif kin dof statements...match and case
+lang = input("What's the programming language you want to learn? ")
+match lang:
+    case "JavaScript":
+        print("You can become a web developer.")
+
+    case "Python":
+        print("You can become a Data Scientist")
+    case _:
+        print("The language doesn't matter.")
+----------------------------------------------------------------------
+************  52. What are Exception Groups in Python?
+
+try:
+raise ExceptionGroup('Example ExceptionGroup', (
+TypeError('Example TypeError'),
+ValueError('Example ValueError'),
+KeyError('Example KeyError'),
+AttributeError('Example AttributeError')
+))
+except* TypeError:
+...
+except* ValueError as e:
+...
+except* (KeyError, AttributeError) as e:
+...
+------------------------------------------------------------------------------------------------------------
+******** What are Function Annotations in Python?
+Function Annotation is a feature that allows you to add metadata to function parameters and return values. 
+This way you can specify the input type of the function parameters and the return type of the value the function returns.
+
+----------------------------------------------------------------------------------------------------------
+****************What are unit tests in Python?
+Unit Testing is the first level of software testing where the smallest testable parts of the software are tested.
+This is used to validate that each unit of the software performs as designed.
+
+-------------------------------------------------------------------------------------------------------------------
+ Is Tuple Comprehension? If yes, how, and if not why?
+(i for i in (1, 2, 3))
+Tuple comprehension is not possible in Python because it will end up in a generator, not a tuple comprehension.
+-----------------------------------------------------------------------------------------------------------------
+*********************************decorator ************
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+# Call the decorated function
+say_hello()
+In this example, my_decorator is a decorator function that takes another function (func) 
+as its argument and returns a new function (wrapper) that wraps the original function with additional behavior.
+When you apply the @my_decorator syntax to the say_hello function, it is equivalent to calling say_hello = my_decorator(say_hello).
+Now, when you call say_hello(), it executes the wrapper function, which includes the additional behavior defined in the decorator.
+
+def print_message(func):
+    def wrapper(*args, **kwargs):
+        print("Before calling the function.")
+        result = func(*args, **kwargs)
+        print("After calling the function.")
+        return result
+    return wrapper
+
+@print_message
+def add(a, b):
+    return a + b
+
+@print_message
+def subtract(a, b):
+    return a - b
+
+result_add = add(5, 3)
+print("With Decorator - Addition Result:", result_add)
+
+result_subtract = subtract(8, 2)
+print("With Decorator - Subtraction Result:", result_subtract)
+
+above alps..individual functions focus on add, sub but if you want add common details for both then you can sued decorator..its code reusability, reduces clutter,code is clean
+---------------------------------------------------------------------------------------------------------------
+******************iterator****
+
+In Python, an iterator is an object that implements the iterator protocol, which consists of the methods __iter__() 
+and __next__(). Iterators are used to represent a stream of data and enable iteration over elements in a sequence, container, or any other iterable object.
+
+Let's break down the iterator protocol:
+__iter__(): This method returns the iterator object itself. It's required for an object to be considered an iterator.
+__next__(): This method returns the next element from the iterator. It raises the StopIteration exception when there are no more elements to return.
+advantage is memory efficient, lazy evaluation, code reusability..only genrates values when required.
+
+class FibonacciIterator:
+    def __init__(self, limit):
+        self.limit = limit
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.a > self.limit:
+            raise StopIteration
+        result = self.a
+        self.a, self.b = self.b, self.a + self.b
+        return result
+
+# Example 1: Use the iterator to print Fibonacci numbers up to 50
+fibonacci_iterator_1 = FibonacciIterator(50)
+print("Fibonacci numbers up to 50:")
+for num in fibonacci_iterator_1:
+    print(num)
+
+# Example 2: Use the same iterator to print Fibonacci numbers up to 100
+fibonacci_iterator_2 = FibonacciIterator(100)
+print("\nFibonacci numbers up to 100:")
+for num in fibonacci_iterator_2:
+    print(num)
+-------------------------------------------------------------------------------------------------------------------
+****************. What are Generators in Python?*******
+Generators in Python are a type of iterable, providing a convenient way to create iterators. They allow you to 
+iterate over a potentially large sequence of data without having to create the entire sequence in memory at once.
+Generators are defined using functions with the yield statement, and they follow the iterator protocol implicitly.
+def generator_function():
+    print("Start of generator function")
+    yield 1
+    print("After first yield")
+    yield 2
+    print("After second yield")
+# Create a generator object
+generator_obj = generator_function()
+# Using the generator to yield values
+generator_value_1 = next(generator_obj)
+print("Received value from generator:", generator_value_1)
+
+generator_value_2 = next(generator_obj)
+print("Received value from generator:", generator_value_2)
+
+As you can see, the generator function doesn't execute all the way to the end immediately. It pauses at each yield statement,
+allowing the caller to receive a value and then resume execution when next() is called again.This ability to pause and resume 
+execution is what makes generator functions powerful, especially when dealing with large datasets or infinite sequences
+&&if you see there..onely fiest yield output is returned..if you give next funv=ction only..the next output will get printed.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Differentiate between shallow copy and deep copy in Python.
+What is the purpose of the __init__ method in Python classes?
+--------------------------------------------------------------------------------------------------------------------------------------
+What is the purpose of the __str__ and __repr__ methods in Python?
+def custom_str(obj):
+    return f"This is a custom __str__ representation for {obj}"
+
+def custom_repr(obj):
+    return f"Custom __repr__ representation: {obj!r}"
+
+# Example usage
+my_object = "Hello, World!"
+
+# Using the custom functions
+str_representation = custom_str(my_object)
+repr_representation = custom_repr(my_object)
+
+print("Custom __str__:", str_representation)
+print("Custom __repr__:", repr_representation)
+
+In this example, custom_str and custom_repr are custom functions that mimic the behavior of __str__ and __repr__. You pass an object to these functions, and they 
+return custom string representations.it's lke used for end user purposes.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the purpose of the super() function in Python?
+in python 3.10> match case came
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ITERATOR
 
